@@ -39,6 +39,7 @@ class NoteController extends Controller
     }
 
     function admin() {
+        //similar to notes method
         $notes = Note::all();
 
         return view('admin.index', [

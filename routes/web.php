@@ -13,16 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')
+->name('homepage');
 
 Route::get('/about', function () {
     return view('misc.about');
-});
+})->name('aboutpage');
 
-Route::get('/notes', 'NoteController@notes');
+Route::get('/notes', 'NoteController@notes')->name('allnotes');
 
-Route::get('/admin', 'NoteController@admin');
+Route::get('/admin', 'NoteController@admin')->name('adminpage');
 
-Route::get('/create', 'NoteController@create');
+Route::get('/create', 'NoteController@create')->name('createnote');
 
-Route::get('/note/{id}', 'NoteController@view');
+Route::get('/note/{id}', 'NoteController@view')->name('singlenote');
