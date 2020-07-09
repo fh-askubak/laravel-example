@@ -4,14 +4,7 @@
 
 @section('content')
 <h2>Admin</h2>
-@if(Session::has('info'))
-<br>
-<div class="row">
-    <div class="col-md-12">
-        <p class="alert alert-info">{{ Session::get('info') }}</p>
-    </div>
-</div>
-@endif
+@include('partials.sessionalerts')
 @include('partials.errors')
 <br>
 <h2>Add New Note</h2>
@@ -38,7 +31,7 @@
                     <div class="d-flex justify-content-around">
                         <a href="{{ route('singlenote', ['id' => $note->id]) }}"class="btn btn-dark">View Note</a>
                         <a href="{{ route('editnotepage', ['id' => $note->id]) }}" class="btn btn-success">Edit</a>
-                        <a href="" class="btn btn-danger">Delete</a>
+                        <a href="{{ route('deletenotepage', ['id' => $note->id]) }}" class="btn btn-danger">Delete</a>
                     </div> 
                 </div>
             </div>

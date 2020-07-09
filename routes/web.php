@@ -29,6 +29,8 @@ Route::group(['prefix' => 'admin'], function() {
     Route::post('/', 'NoteController@create')->name('createnote');
     Route::get('/{id}', 'NoteController@edit')->name('editnotepage');
     Route::patch('/{id}', 'NoteController@update')->name('updatenote');
+    Route::get('/delete/{id}', 'NoteController@deleteNote')->name('deletenotepage');
+    Route::post('/delete/{id}', 'NoteController@delete')->name('deletenote');
 });
 
 

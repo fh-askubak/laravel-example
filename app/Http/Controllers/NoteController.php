@@ -73,7 +73,25 @@ class NoteController extends Controller
         //redirect back to admin page
         return redirect()
             ->route('adminpage')
-            ->with('update', 'Post '. $update->title .' Updated!');
+            ->with('update', 'Note updated!');
+    }
+
+    function deleteNote($id) {
+        //find note to be deleted
+        $noteToBeDeleted = Note::findOrFail($id);
+        //send user to delete page
+        return view('notes.deletenotepage', [
+            'note' => $noteToBeDeleted
+        ]);
+    }
+
+    function delete($id) {
+        //find note to delete
+        $note = Note::findOrFail($id);
+        //if exists, delete note
+        Note::destroy($note->id);
+        //redirect back to admin page
+        return redirect()->route('adminpage')->with('deleted', 'Note Deleted):');
     }
 
     function admin() {
