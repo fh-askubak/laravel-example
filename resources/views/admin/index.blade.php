@@ -12,15 +12,7 @@
     </div>
 </div>
 @endif
-@if(count($errors->all()))
-    <div class="alert alert-danger">
-        <ul>
-            @foreach($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+@include('partials.errors')
 <br>
 <h2>Add New Note</h2>
 <form action="{{ route('createnote') }}" method="post">
