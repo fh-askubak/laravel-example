@@ -4,9 +4,26 @@
 
 @section('content')
 <h2>Admin</h2>
+@if(Session::has('info'))
+<br>
+<div class="row">
+    <div class="col-md-12">
+        <p class="alert alert-info">{{ Session::get('info') }}</p>
+    </div>
+</div>
+@endif
+@if(count($errors->all()))
+    <div class="alert alert-danger">
+        <ul>
+            @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <br>
 <h2>Add New Note</h2>
-<form action="/create">
+<form action="{{ route('createnote') }}" method="post">
     <input type="text" name="title" placeholder="Title">
     <input type="text" name="content" placeholder="Content">
     {{ csrf_field() }}
@@ -21,7 +38,7 @@
         {{ $note->content }}<br>
         {{ $note->created_at->diffForHumans() }}
         <br>
-        <a href="/note/{{ $note->id }}">View Note</a>
+        <a href="{{ route('singlenote', ['id' => $note->id]) }}">View Note</a>
     </li>
     @endforeach
 </ul>

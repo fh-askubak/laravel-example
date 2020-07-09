@@ -22,8 +22,8 @@ Route::get('/about', function () {
 
 Route::get('/notes', 'NoteController@notes')->name('allnotes');
 
+Route::get('/note/{id}', 'NoteController@view')->name('singlenote');
+
 Route::get('/admin', 'NoteController@admin')->name('adminpage');
 
-Route::get('/create', 'NoteController@create')->name('createnote');
-
-Route::get('/note/{id}', 'NoteController@view')->name('singlenote');
+Route::post('/admin', 'NoteController@create')->name('createnote');

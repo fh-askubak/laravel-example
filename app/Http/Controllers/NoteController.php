@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Note;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Factory as Validator;
 
 class NoteController extends Controller
 {
@@ -17,7 +18,17 @@ class NoteController extends Controller
         ]);
     }
 
-    function create(Request $request) {
+    function create(Request $request, Validator $validator) {
+        //validate input
+        $validation = $validator->make($request->all(), [
+            //validation rules
+            'title' => 'required|min:3',
+            'content' => 'required|min:5'
+        ]);
+        //if validation fails, send users back to previous page with errors
+        if($validation->fails()) {
+            return redirect()->back()->withErrors($validation);
+        }
         //create new note
         $note = new Note();
         //assign request input to new note
@@ -26,7 +37,8 @@ class NoteController extends Controller
         //save to database
         $note->save();
         //redirect after saving
-        return redirect('/admin');
+        return redirect()->route('adminpage')
+            ->with('info', 'New Post Added: ' . $request->input('title'));
     }
 
     function view($id) {
