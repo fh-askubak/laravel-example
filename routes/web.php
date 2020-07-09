@@ -22,8 +22,13 @@ Route::get('/about', function () {
 
 Route::get('/notes', 'NoteController@notes')->name('allnotes');
 
-Route::get('/note/{id}', 'NoteController@view')->name('singlenote');
+Route::get('/note/{id}', 'NoteController@viewNote')->name('singlenote');
 
-Route::get('/admin', 'NoteController@admin')->name('adminpage');
+Route::group(['prefix' => 'admin'], function() {
+    Route::get('/', 'NoteController@admin')->name('adminpage');
+    Route::post('/', 'NoteController@create')->name('createnote');
+    Route::get('/{id}', 'NoteController@edit')->name('editnotepage');
+    Route::patch('/{id}', 'NoteController@update')->name('updatenote');
+});
 
-Route::post('/admin', 'NoteController@create')->name('createnote');
+

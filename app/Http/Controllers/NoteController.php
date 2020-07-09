@@ -36,18 +36,44 @@ class NoteController extends Controller
         $note->content = $request->content;
         //save to database
         $note->save();
-        //redirect after saving
+        //redirect after saving and include title of input with Session
         return redirect()->route('adminpage')
             ->with('info', 'New Post Added: ' . $request->input('title'));
     }
 
-    function view($id) {
+    function viewNote($id) {
         //find specific note by id
         $note = Note::findOrFail($id);
         //return single note view and pass found note
         return view('notes.singlenote', [
             'note' => $note
         ]);
+    }
+
+    function edit($id) {
+        //get note to edit
+        $noteToEdit = Note::findOrFail($id);
+        //redirect to edit page with note data
+        return view('notes.editnotepage', [
+            'note' => $noteToEdit
+        ]);
+    }
+    function update($id, Request $request){
+        //find note
+        $update = Note::findOrFail($id);
+        //update fields from request if they are not empty
+        if('' != $request->title){
+            $update->title = $request->title;
+        }
+        if('' != $request->content) {
+            $update->content = $request->content;
+        }
+        //save new note
+        $update->save();
+        //redirect back to admin page
+        return redirect()
+            ->route('adminpage')
+            ->with('update', 'Post '. $update->title .' Updated!');
     }
 
     function admin() {

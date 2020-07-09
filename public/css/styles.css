@@ -1,3 +1,25 @@
 .col-12 h2 {
     color: red;
 }
+
+div.notelist,
+div.notelist div.note {
+    border: solid 1px black;
+    border-radius: 1rem;
+    box-shadow: 5px 5px grey;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+div.notelist {
+    padding: 1rem;
+}
+
+div.row.singlenote {
+    text-align: center;
+}
+
+div.row.singlenote div {
+    padding: 1rem;
+    margin: auto;
+}
