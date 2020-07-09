@@ -33,8 +33,6 @@ Route::group(['prefix' => 'admin'], function() {
     Route::post('/delete/{id}', 'NoteController@delete')->name('deletenote');
 });
 
-
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

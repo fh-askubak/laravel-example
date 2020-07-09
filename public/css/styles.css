@@ -23,3 +23,7 @@ div.row.singlenote div {
     padding: 1rem;
     margin: auto;
 }
+
+a.notecard:hover {
+    text-decoration: none;
+}
